@@ -1,0 +1,19 @@
+CREATE View [dbo].[vwFactProductInventory] as
+
+SELECT  [ProductKey]
+      ,CAST(CONVERT(VARCHAR(10), DATEADD(d, DATEOFFSET, [MovementDate]), 112) as INT) [DateKey]
+	  ,DATEADD(d, DATEOFFSET, [MovementDate]) [MovementDate]
+      ,[UnitCost]
+      ,[UnitsIn]
+      ,[UnitsOut]
+      ,[UnitsBalance]
+  FROM [dbo].[FactProductInventory] 
+
+      JOIN (  SELECT Datediff(d, [FullDateAlternateKey], getdate()) DATEOFFSET
+				 FROM [dbo].[DimDate] DD 
+			  Inner Join (
+				  SELECT MAX([DateKey]) DK
+				  FROM [dbo].[FactProductInventory] FPI ) Offset ON
+				  DD.DateKey = Offset.DK)OFFSET ON 1=1
+
+GO

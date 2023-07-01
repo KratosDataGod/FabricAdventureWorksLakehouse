@@ -1,0 +1,52 @@
+CREATE VIEW [dbo].[vwDimDate] as
+
+
+SELECT 
+	  CAST(CONVERT(VARCHAR(10), DATEADD(d, DATEOFFSET, [FullDateAlternateKey]), 112) as INT) [DateKey]
+	  ,DATEADD(d, DATEOFFSET, [FullDateAlternateKey]) [FullDateAlternateKey]
+
+	  ,DATEPART(WEEKDAY, DATEADD(d, DATEOFFSET, [FullDateAlternateKey])) [DayNumberOfWeek]
+	  ,DATENAME(WEEKDAY, DATEADD(d, DATEOFFSET, [FullDateAlternateKey])) [EnglishDayNameOfWeek]
+	  ,DATEPART(d, DATEADD(d, DATEOFFSET, [FullDateAlternateKey]))  [DayNumberOfMonth]
+	  ,DATEPART(dy, DATEADD(d, DATEOFFSET, [FullDateAlternateKey]))  [DayNumberOfYear]
+	  ,DATEPART(wk, DATEADD(d, DATEOFFSET, [FullDateAlternateKey]))  [WeekNumberOfYear]
+	  ,DATENAME(MONTH, DATEADD(d, DATEOFFSET, [FullDateAlternateKey])) [EnglishMonthName]
+	  ,DATEPART(mm, DATEADD(d, DATEOFFSET, [FullDateAlternateKey])) [MonthNumberOfYear]
+	  ,DATEPART(q, DATEADD(d, DATEOFFSET, [FullDateAlternateKey])) [CalendarQuarter]
+
+	  ,DATEPART(yyyy, DATEADD(d, DATEOFFSET, [FullDateAlternateKey])) [CalendarYear]
+	  , Cast( DATEPART(yyyy, DATEADD(d, DATEOFFSET, [FullDateAlternateKey])) as varchar) + ' ' + SUBSTRING(DATENAME(MONTH, DATEADD(d, DATEOFFSET, [FullDateAlternateKey])), 1,3) as YearMonth
+	  , CAST(SUBSTRING(CONVERT(VARCHAR(10), DATEADD(d, DATEOFFSET, [FullDateAlternateKey]), 112), 1,6) as int) as YearMonthSortOrder
+      , CASE
+			WHEN DATEPART(mm, DATEADD(d, DATEOFFSET, [FullDateAlternateKey])) <= 6 THEN 1
+			ELSE 2 
+			END AS [CalendarSemester]
+	-- End of fiscal year is 6/31, start is 7/1
+      , CASE
+			WHEN DATEPART(mm, DATEADD(d, DATEOFFSET, [FullDateAlternateKey])) <=3 THEN 3
+			WHEN DATEPART(mm, DATEADD(d, DATEOFFSET, [FullDateAlternateKey])) <=6 THEN 4
+			WHEN DATEPART(mm, DATEADD(d, DATEOFFSET, [FullDateAlternateKey])) <=9 THEN 1
+			ELSE 2
+			END AS [FiscalQuarter]
+      ,CASE
+			WHEN DATEPART(mm, DATEADD(d, DATEOFFSET, [FullDateAlternateKey])) <= 6 THEN DATEPART(yyyy, DATEADD(d, DATEOFFSET, [FullDateAlternateKey]))
+			ELSE DATEPART(yyyy, DATEADD(d, DATEOFFSET, [FullDateAlternateKey])) + 1 
+			END AS [FiscalYear]
+      ,CASE
+			WHEN DATEPART(mm, DATEADD(d, DATEOFFSET, [FullDateAlternateKey])) <= 6 THEN 2
+			ELSE 1 
+			END AS [FiscalSemester]
+  FROM [dbo].[DimDate] 
+
+  
+    JOIN (  SELECT Datediff(d, [FullDateAlternateKey], getdate()) DATEOFFSET
+				 FROM [dbo].[DimDate] DD 
+			  Inner Join (
+				  SELECT MAX([DateKey]) DK
+				  FROM [dbo].[DimDate] FPI ) Offset ON
+				  DD.DateKey = Offset.DK)OFFSET ON 1=1
+
+
+GO
+
+

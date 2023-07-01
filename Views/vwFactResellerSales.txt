@@ -1,0 +1,49 @@
+CREATE VIEW [dbo].[vwFactResellerSales] as
+SELECT FRS.[ProductKey]
+	  , DP.ProductSubcategoryKey
+	  , DPS.ProductCategoryKey
+	  ,CAST(CONVERT(VARCHAR(10), DATEADD(d, OOFFSET.DATEOFFSET, [OrderDate]), 112) as INT) [OrderDateKey]
+	  ,CAST(CONVERT(VARCHAR(10), DATEADD(d, OOFFSET.DATEOFFSET, [DueDate]), 112) as INT) [DueDateKey]
+	  ,CAST(CONVERT(VARCHAR(10), DATEADD(d, OOFFSET.DATEOFFSET, [ShipDate]), 112) as INT) [ShipDateKey]
+      ,[ResellerKey]
+      ,[EmployeeKey]
+      ,[PromotionKey]
+      ,[CurrencyKey]
+      ,[SalesTerritoryKey]
+      ,[SalesOrderNumber]
+      ,[SalesOrderLineNumber]
+      ,[RevisionNumber]
+      ,[OrderQuantity]
+      ,[UnitPrice]
+      ,[ExtendedAmount]
+      ,[UnitPriceDiscountPct]
+      ,[DiscountAmount]
+      ,[ProductStandardCost]
+      ,[TotalProductCost]
+      ,[SalesAmount]
+      ,[TaxAmt]
+      ,[Freight]
+      ,[CarrierTrackingNumber]
+      ,[CustomerPONumber]
+	  ,DATEADD(d, OOFFSET.DATEOFFSET, [OrderDate]) [OrderDate]
+	  ,DATEADD(d, OOFFSET.DATEOFFSET, [DueDate]) [DueDate]
+	  ,DATEADD(d, OOFFSET.DATEOFFSET, [ShipDate]) [ShipDate]
+	  --SELECT COUNT(*) CNT
+  FROM [dbo].[FactResellerSales] FRS 
+  --60855
+  JOIN [dbo].[DimProduct] DP 
+	ON FRS.ProductKey = DP.ProductKey
+JOIN [dbo].[DimProductSubcategory] DPS 
+	ON DP.ProductSubcategoryKey = DPS.[ProductSubcategoryKey]
+ 
+JOIN (  SELECT Datediff(d, [FullDateAlternateKey], getdate()) DATEOFFSET
+				 FROM [dbo].[DimDate] DD 
+			  Inner Join (
+				  SELECT MAX([DueDateKey]) ODK
+				  FROM [dbo].[FactResellerSales] FPI ) Offset ON
+				  DD.DateKey = Offset.ODK)OOFFSET ON 1=1
+  
+  
+
+
+GO
