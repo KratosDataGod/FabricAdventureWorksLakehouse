@@ -1,0 +1,12 @@
+SalesTerritoryKey,SalesTerritoryAlternateKey,SalesTerritoryRegion,SalesTerritoryCountry,SalesTerritoryGroup,SalesTerritoryImage
+1,1,Northwest,United States,North America,0xFFD8FFE000104A4640x2F315F3F2FE7C98A9
+2,2,Northeast,United States,North America,0xFFD8FFE000104A4640x4D37E5B789B60AB57
+3,3,Central,United States,North America,0xFFD8FFE000104A4640x8C6FE9AA9B33B7992
+4,4,Southwest,United States,North America,0xFFD8FFE000104A4640x2F0B71A46633D8CFB
+5,5,Southeast,United States,North America,0xFFD8FFE000104A4640x39569A8C5BA8965E1
+6,6,Canada,Canada,North America,0xFFD8FFE000104A4640x716BBC6639123C284
+7,7,France,France,Europe,0xFFD8FFE000104A4640x3C4A9D14A728F324F
+8,8,Germany,Germany,Europe,0xFFD8FFE000104A4640x93E91BE37F4F9F8D3
+9,9,Australia,Australia,Pacific,0xFFD8FFE000104A4640x8A8C6EA5175EAC5C9
+10,10,United Kingdom,United Kingdom,Europe,0xFFD8FFE000104A4640x6725B5B23BB7E3CF8
+11,0,NA,NA,NA,NULL
