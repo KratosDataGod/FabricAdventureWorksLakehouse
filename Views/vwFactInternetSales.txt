@@ -1,0 +1,49 @@
+
+CREATE View [dbo].[vwFactInternetSales] as 
+SELECT  FRS.[ProductKey]
+	  , DP.ProductSubcategoryKey
+	  , DPS.ProductCategoryKey
+	  ,CAST(CONVERT(VARCHAR(10), DATEADD(d, DOFFSET.DATEOFFSET, [OrderDate]), 112) as INT) [OrderDateKey]
+	  ,CAST(CONVERT(VARCHAR(10), DATEADD(d, DOFFSET.DATEOFFSET, [DueDate]), 112) as INT) [DueDateKey]
+	  ,CAST(CONVERT(VARCHAR(10), DATEADD(d, DOFFSET.DATEOFFSET, [ShipDate]), 112) as INT) [ShipDateKey]
+      ,[CustomerKey]
+      ,[PromotionKey]
+      ,[CurrencyKey]
+      ,[SalesTerritoryKey]
+      ,[SalesOrderNumber]
+      ,[SalesOrderLineNumber]
+      ,[RevisionNumber]
+      ,[OrderQuantity]
+      ,CAST([UnitPrice] as float) as [UnitPrice]
+      ,CAST([ExtendedAmount] as float) as [ExtendedAmount]
+      ,[UnitPriceDiscountPct]
+      ,CAST([DiscountAmount] as float) as [DiscountAmount]
+      ,CAST([ProductStandardCost] as float) as [ProductStandardCost]
+      ,CAST([TotalProductCost] as float) as [TotalProductCost]
+      ,CAST([SalesAmount] as float) as [SalesAmount]
+      ,CAST([TaxAmt] as float) as [TaxAmt]
+      ,CAST([Freight] as float) as [Freight]
+      ,[CarrierTrackingNumber]
+      ,[CustomerPONumber]
+	  ,DATEADD(d, DOFFSET.DATEOFFSET, [OrderDate]) [OrderDate]
+	  ,DATEADD(d, DOFFSET.DATEOFFSET, [DueDate]) [DueDate]
+	  ,DATEADD(d, DOFFSET.DATEOFFSET, [ShipDate]) [ShipDate]
+
+	  --SELECT COUNT(*)
+  FROM [dbo].[FactInternetSales] FRS 
+  --60855
+  JOIN [dbo].[DimProduct] DP 
+	ON FRS.ProductKey = DP.ProductKey
+JOIN [dbo].[DimProductSubcategory] DPS 
+	ON DP.ProductSubcategoryKey = DPS.[ProductSubcategoryKey]
+  
+JOIN (  SELECT Datediff(d, [FullDateAlternateKey], getdate()) + 12 DATEOFFSET
+				 FROM [dbo].[DimDate] DD 
+			  Inner Join (
+				  SELECT MAX([DueDateKey]) DDK
+				  FROM [dbo].[FactInternetSales] FPI ) Offset ON
+				  DD.DateKey = Offset.DDK)DOFFSET ON 1=1
+
+
+
+GO

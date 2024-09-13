@@ -1,0 +1,20 @@
+CREATE view [dbo].[vwFactSalesQuota] as
+
+SELECT [SalesQuotaKey]
+      ,[EmployeeKey]
+      ,CAST(CONVERT(VARCHAR(10), DATEADD(d, DATEOFFSET, [Date]), 112) as INT) [DateKey]
+	  ,cast(SUBSTRING(CAST((CAST(CONVERT(VARCHAR(10), DATEADD(d, DATEOFFSET, [Date]), 112) as INT) ) as varchar) , 1,4) as smallint) [CalendarYear]
+      ,[CalendarQuarter]
+      ,[SalesAmountQuota]
+	  ,DATEADD(d, DATEOFFSET, [Date]) [Date]
+
+  FROM [dbo].[FactSalesQuota] 
+
+        JOIN (  SELECT Datediff(d, [FullDateAlternateKey], getdate()) DATEOFFSET
+				 FROM [dbo].[DimDate] DD 
+			  Inner Join (
+				  SELECT MAX([DateKey]) DK
+				  FROM [dbo].[FactSalesQuota] FPI ) Offset ON
+				  DD.DateKey = Offset.DK)OFFSET ON 1=1
+
+GO
