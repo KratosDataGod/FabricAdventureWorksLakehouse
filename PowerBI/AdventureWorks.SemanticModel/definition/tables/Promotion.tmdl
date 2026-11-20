@@ -1,0 +1,82 @@
+/// Sales promotions.
+table Promotion
+	lineageTag: f4201d77-0380-5ede-a0ee-7e075553b7a7
+	sourceLineageTag: [gold].[DimPromotion]
+
+	column PromotionKey
+		dataType: int64
+		isKey
+		isHidden
+		formatString: 0
+		lineageTag: cf1c6a11-2016-574d-b9fe-0119cdae4f61
+		sourceLineageTag: PromotionKey
+		summarizeBy: none
+		sourceColumn: PromotionKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column Promotion
+		dataType: string
+		lineageTag: 5528e2d4-3679-5158-bdbc-2efdb32d7e97
+		sourceLineageTag: PromotionName
+		summarizeBy: none
+		sourceColumn: PromotionName
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Promotion Type'
+		dataType: string
+		lineageTag: 235aca0d-5202-5331-8ab3-1c6318dd80fe
+		sourceLineageTag: PromotionType
+		summarizeBy: none
+		sourceColumn: PromotionType
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Promotion Category'
+		dataType: string
+		lineageTag: 6261ff61-1f20-5cc3-9c85-ea45afdcb25f
+		sourceLineageTag: PromotionCategory
+		summarizeBy: none
+		sourceColumn: PromotionCategory
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Discount Pct'
+		dataType: double
+		formatString: 0.0%;-0.0%;0.0%
+		lineageTag: 113bf88d-4bdb-5900-bbcf-d8b8c442a4ae
+		sourceLineageTag: DiscountPct
+		summarizeBy: none
+		sourceColumn: DiscountPct
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Min Quantity'
+		dataType: int64
+		formatString: 0
+		lineageTag: 1bbad222-3ca9-509d-85b9-cc39988457a4
+		sourceLineageTag: MinQty
+		summarizeBy: none
+		sourceColumn: MinQty
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Max Quantity'
+		dataType: int64
+		formatString: 0
+		lineageTag: c02ce5f1-87c5-5a4d-9a62-bb932f577209
+		sourceLineageTag: MaxQty
+		summarizeBy: none
+		sourceColumn: MaxQty
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Promotion = entity
+		mode: directLake
+		source
+			entityName: DimPromotion
+			schemaName: gold
+			expressionSource: 'DirectLake - AdventureWorksLH'
+
+	annotation PBI_ResultType = Table

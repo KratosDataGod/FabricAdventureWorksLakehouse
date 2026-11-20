@@ -1,0 +1,44 @@
+relationship 8016c725-4c8c-5730-bdd1-c0db30e57c18
+	fromColumn: Sales.'Order Date'
+	toColumn: Date.Date
+
+relationship d3f86142-86df-5d30-ad04-bc77543fae25
+	isActive: false
+	fromColumn: Sales.'Ship Date'
+	toColumn: Date.Date
+
+relationship 34aab45c-d8f6-5e04-9b0b-4b890fef5cfd
+	fromColumn: Sales.ProductKey
+	toColumn: Product.ProductKey
+
+relationship b8a1b0cb-f4b7-52c6-96d4-5d087c7d51bd
+	fromColumn: Sales.CustomerKey
+	toColumn: Customer.CustomerKey
+
+relationship 05ed577c-7d73-55c5-ad5c-274ec55b4434
+	fromColumn: Sales.ResellerKey
+	toColumn: Reseller.ResellerKey
+
+relationship 7fb4e435-f631-50eb-af90-18df93ded277
+	fromColumn: Sales.EmployeeKey
+	toColumn: Employee.EmployeeKey
+
+relationship 09f6ef80-9259-5687-90e1-8563c81eccfc
+	fromColumn: Sales.PromotionKey
+	toColumn: Promotion.PromotionKey
+
+relationship 9a2efd89-3b6c-5917-a159-e77bf6349aea
+	fromColumn: Sales.CurrencyKey
+	toColumn: Currency.CurrencyKey
+
+relationship e07c1acd-7b52-50d5-8768-57d193f40efc
+	fromColumn: Sales.SalesTerritoryKey
+	toColumn: 'Sales Territory'.SalesTerritoryKey
+
+relationship 74ea89c2-6830-5ef9-8edc-3fbd92ec3757
+	fromColumn: 'Sales Quotas'.'Quota Date'
+	toColumn: Date.Date
+
+relationship 4dffe03b-53b4-5665-b0d0-57259e1c3d19
+	fromColumn: 'Sales Quotas'.EmployeeKey
+	toColumn: Employee.EmployeeKey

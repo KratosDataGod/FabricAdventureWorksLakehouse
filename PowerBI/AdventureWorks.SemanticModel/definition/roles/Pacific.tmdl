@@ -1,0 +1,5 @@
+/// Members see only sales in the Pacific territory group.
+role Pacific
+	modelPermission: read
+
+	tablePermission 'Sales Territory' = [Territory Group] == "Pacific"

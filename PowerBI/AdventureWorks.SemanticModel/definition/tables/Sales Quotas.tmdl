@@ -1,0 +1,70 @@
+/// Quarterly sales quota for each sales person.
+table 'Sales Quotas'
+	lineageTag: 2fba7755-222c-57bc-b489-3d9006303127
+	sourceLineageTag: [gold].[FactSalesQuota]
+
+	/// Sales quota for the sales people in context.
+	measure 'Sales Quota' = SUM ( 'Sales Quotas'[SalesAmountQuota] )
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: Quota
+		lineageTag: 4a1ab669-344a-5679-9822-3cbda803d73b
+
+	/// Reseller sales as a share of quota.
+	measure 'Quota Attainment %' = DIVIDE ( [Reseller Sales], [Sales Quota] )
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: Quota
+		lineageTag: e2c57462-7e08-5274-8dc8-bd009225257d
+
+	column SalesQuotaKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: db4e81bf-4f76-58f3-b6e4-6fabf66824ae
+		sourceLineageTag: SalesQuotaKey
+		summarizeBy: none
+		sourceColumn: SalesQuotaKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column EmployeeKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 986cd1ed-86fb-566b-a29d-b07f54cc0bd1
+		sourceLineageTag: EmployeeKey
+		summarizeBy: none
+		sourceColumn: EmployeeKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Quota Date'
+		dataType: dateTime
+		isHidden
+		formatString: Short Date
+		lineageTag: bc6dc6b8-da9d-5111-ac68-e1dce200b70b
+		sourceLineageTag: Date
+		summarizeBy: none
+		sourceColumn: Date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column SalesAmountQuota
+		dataType: double
+		isHidden
+		lineageTag: f2f2ab0a-50ba-578a-b917-695bdec7a2c5
+		sourceLineageTag: SalesAmountQuota
+		summarizeBy: none
+		sourceColumn: SalesAmountQuota
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Sales Quotas' = entity
+		mode: directLake
+		source
+			entityName: FactSalesQuota
+			schemaName: gold
+			expressionSource: 'DirectLake - AdventureWorksLH'
+
+	annotation PBI_ResultType = Table

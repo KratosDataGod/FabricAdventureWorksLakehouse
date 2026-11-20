@@ -1,0 +1,58 @@
+{
+  "properties": {
+    "description": "Reloads the silver tables from the files and rebuilds the gold tables so every date ends today. The setup notebook fills in the workspace and notebook IDs.",
+    "activities": [
+      {
+        "name": "Load Silver",
+        "type": "TridentNotebook",
+        "dependsOn": [],
+        "policy": {
+          "timeout": "0.01:00:00",
+          "retry": 1,
+          "retryIntervalInSeconds": 60,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "typeProperties": {
+          "notebookId": "22222222-2222-2222-2222-222222222222",
+          "workspaceId": "00000000-0000-0000-0000-000000000000",
+          "parameters": {
+            "LAKEHOUSE_NAME": {
+              "value": "AdventureWorksLH",
+              "type": "string"
+            }
+          }
+        }
+      },
+      {
+        "name": "Build Gold",
+        "type": "TridentNotebook",
+        "dependsOn": [
+          {
+            "activity": "Load Silver",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ],
+        "policy": {
+          "timeout": "0.01:00:00",
+          "retry": 1,
+          "retryIntervalInSeconds": 60,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "typeProperties": {
+          "notebookId": "33333333-3333-3333-3333-333333333333",
+          "workspaceId": "00000000-0000-0000-0000-000000000000",
+          "parameters": {
+            "LAKEHOUSE_NAME": {
+              "value": "AdventureWorksLH",
+              "type": "string"
+            }
+          }
+        }
+      }
+    ]
+  }
+}

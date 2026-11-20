@@ -1,0 +1,104 @@
+/// Employees. Sales people are linked to reseller sales and sales quotas.
+table Employee
+	lineageTag: d1d656de-83e4-5812-96bd-ad193d491d0b
+	sourceLineageTag: [gold].[DimEmployee]
+
+	column EmployeeKey
+		dataType: int64
+		isKey
+		isHidden
+		formatString: 0
+		lineageTag: bfd805f4-f9e7-5334-a9cb-8bda998a6a77
+		sourceLineageTag: EmployeeKey
+		summarizeBy: none
+		sourceColumn: EmployeeKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column ParentEmployeeKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 8224a551-e700-5ed0-861f-cd6e95a36e97
+		sourceLineageTag: ParentEmployeeKey
+		summarizeBy: none
+		sourceColumn: ParentEmployeeKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column Employee
+		dataType: string
+		lineageTag: b672b5ab-34f5-5628-a862-9efc97ae0310
+		sourceLineageTag: EmployeeName
+		summarizeBy: none
+		sourceColumn: EmployeeName
+
+		annotation SummarizationSetBy = Automatic
+
+	column Title
+		dataType: string
+		lineageTag: cc2ef643-3c8c-50fb-a862-44e128ab47c4
+		sourceLineageTag: Title
+		summarizeBy: none
+		sourceColumn: Title
+
+		annotation SummarizationSetBy = Automatic
+
+	column Department
+		dataType: string
+		lineageTag: 903d4ba2-71cb-53a6-9757-cc1ae93b1e44
+		sourceLineageTag: Department
+		summarizeBy: none
+		sourceColumn: Department
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Hire Date'
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: 383cca19-9483-5d8b-bf82-f02fbdd6487e
+		sourceLineageTag: HireDate
+		summarizeBy: none
+		sourceColumn: HireDate
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Is Sales Person'
+		dataType: boolean
+		lineageTag: 7864c385-ae50-5472-a24b-9b2241c06c81
+		sourceLineageTag: IsSalesPerson
+		summarizeBy: none
+		sourceColumn: IsSalesPerson
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Is Current'
+		dataType: boolean
+		lineageTag: 55898058-9a8a-59c9-b521-aa88937ec666
+		sourceLineageTag: IsCurrent
+		summarizeBy: none
+		sourceColumn: IsCurrent
+
+		annotation SummarizationSetBy = Automatic
+
+	column SalesTerritoryKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 1a0ad13e-431b-5343-91f7-91b9700e7fa3
+		sourceLineageTag: SalesTerritoryKey
+		summarizeBy: none
+		sourceColumn: SalesTerritoryKey
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Employee = entity
+		mode: directLake
+		source
+			entityName: DimEmployee
+			schemaName: gold
+			expressionSource: 'DirectLake - AdventureWorksLH'
+
+	annotation PBI_ResultType = Table
