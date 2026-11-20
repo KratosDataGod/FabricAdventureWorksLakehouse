@@ -21,7 +21,7 @@ SELECT
 			WHEN DATEPART(mm, DATEADD(d, DATEOFFSET, [FullDateAlternateKey])) <= 6 THEN 1
 			ELSE 2 
 			END AS [CalendarSemester]
-	-- End of fiscal year is 6/31, start is 7/1
+	-- End of fiscal year is 6/30, start is 7/1
       , CASE
 			WHEN DATEPART(mm, DATEADD(d, DATEOFFSET, [FullDateAlternateKey])) <=3 THEN 3
 			WHEN DATEPART(mm, DATEADD(d, DATEOFFSET, [FullDateAlternateKey])) <=6 THEN 4
@@ -39,7 +39,9 @@ SELECT
   FROM [dbo].[DimDate] 
 
   
-    JOIN (  SELECT Datediff(d, [FullDateAlternateKey], getdate()) DATEOFFSET
+    -- Shift the calendar so it ends on Dec 31 of the current year (or next year, in the last days of December).
+	-- That keeps whole calendar years and covers the due and ship dates in vwFactInternetSales, which run up to 12 days past today.
+    JOIN (  SELECT Datediff(d, [FullDateAlternateKey], DATEFROMPARTS(YEAR(DATEADD(d, 12, getdate())), 12, 31)) DATEOFFSET
 				 FROM [dbo].[DimDate] DD 
 			  Inner Join (
 				  SELECT MAX([DateKey]) DK
