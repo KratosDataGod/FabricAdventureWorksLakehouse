@@ -1,0 +1,215 @@
+/// Products with their category and subcategory.
+table Product
+	lineageTag: a750d4fc-725a-5ab1-838b-34dbbb8981b0
+	sourceLineageTag: [gold].[DimProduct]
+
+	column ProductKey
+		dataType: int64
+		isKey
+		isHidden
+		formatString: 0
+		lineageTag: e15b8443-438d-5ae5-8f4f-64662ed22916
+		sourceLineageTag: ProductKey
+		summarizeBy: none
+		sourceColumn: ProductKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Product Code'
+		dataType: string
+		lineageTag: 04311c5c-21fb-584a-a2fd-75a36632ba3e
+		sourceLineageTag: ProductAlternateKey
+		summarizeBy: none
+		sourceColumn: ProductAlternateKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column Product
+		dataType: string
+		lineageTag: a18ad29e-2b6e-5b43-800c-f94e0ff4cb12
+		sourceLineageTag: ProductName
+		summarizeBy: none
+		sourceColumn: ProductName
+
+		annotation SummarizationSetBy = Automatic
+
+	column Subcategory
+		dataType: string
+		lineageTag: fdfcea2f-b7a1-5abf-833e-a69ff21588e8
+		sourceLineageTag: ProductSubcategory
+		summarizeBy: none
+		sourceColumn: ProductSubcategory
+
+		annotation SummarizationSetBy = Automatic
+
+	column Category
+		dataType: string
+		lineageTag: b44fdd3d-7f7e-5062-bcb0-b3d4bed8d771
+		sourceLineageTag: ProductCategory
+		summarizeBy: none
+		sourceColumn: ProductCategory
+
+		annotation SummarizationSetBy = Automatic
+
+	column Model
+		dataType: string
+		lineageTag: 0fd62eab-2caa-5946-bdf6-f1359c8796d4
+		sourceLineageTag: ModelName
+		summarizeBy: none
+		sourceColumn: ModelName
+
+		annotation SummarizationSetBy = Automatic
+
+	column Color
+		dataType: string
+		lineageTag: e51add2d-a587-50a5-8302-43bdae6f2a8a
+		sourceLineageTag: Color
+		summarizeBy: none
+		sourceColumn: Color
+
+		annotation SummarizationSetBy = Automatic
+
+	column Size
+		dataType: string
+		lineageTag: d7c8a114-df51-5897-b6a9-f6379d713f58
+		sourceLineageTag: Size
+		summarizeBy: none
+		sourceColumn: Size
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Size Range'
+		dataType: string
+		lineageTag: 7d32a31d-4217-5125-a563-b47379ee9789
+		sourceLineageTag: SizeRange
+		summarizeBy: none
+		sourceColumn: SizeRange
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Product Line'
+		dataType: string
+		lineageTag: 5178bc78-f412-5305-99a3-80da8e0dd8c5
+		sourceLineageTag: ProductLine
+		summarizeBy: none
+		sourceColumn: ProductLine
+
+		annotation SummarizationSetBy = Automatic
+
+	column Class
+		dataType: string
+		lineageTag: 775cf7c9-6aa3-56f2-9695-1d86596d935e
+		sourceLineageTag: Class
+		summarizeBy: none
+		sourceColumn: Class
+
+		annotation SummarizationSetBy = Automatic
+
+	column Style
+		dataType: string
+		lineageTag: ef8c5c79-b266-505e-896d-ad84415efbf7
+		sourceLineageTag: Style
+		summarizeBy: none
+		sourceColumn: Style
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Standard Cost'
+		dataType: double
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: 9ef8ff65-a97d-5bd0-80dc-ee50c2f5e40f
+		sourceLineageTag: StandardCost
+		summarizeBy: none
+		sourceColumn: StandardCost
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'List Price'
+		dataType: double
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: 557b5a05-ebf7-5167-9332-26de552d3970
+		sourceLineageTag: ListPrice
+		summarizeBy: none
+		sourceColumn: ListPrice
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Dealer Price'
+		dataType: double
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: 76404348-f0d5-560d-ae4d-5bd922b1239b
+		sourceLineageTag: DealerPrice
+		summarizeBy: none
+		sourceColumn: DealerPrice
+
+		annotation SummarizationSetBy = Automatic
+
+	column Weight
+		dataType: double
+		lineageTag: 2478e14c-9da8-5681-8020-990eb95e89a6
+		sourceLineageTag: Weight
+		summarizeBy: none
+		sourceColumn: Weight
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Days to Manufacture'
+		dataType: int64
+		formatString: 0
+		lineageTag: 1a02aa86-b371-59eb-88a3-7570353fda7b
+		sourceLineageTag: DaysToManufacture
+		summarizeBy: none
+		sourceColumn: DaysToManufacture
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Is Finished Good'
+		dataType: boolean
+		lineageTag: 9ab3bbe2-dcca-560d-aff3-257b7e8c3d1a
+		sourceLineageTag: IsFinishedGood
+		summarizeBy: none
+		sourceColumn: IsFinishedGood
+
+		annotation SummarizationSetBy = Automatic
+
+	column Description
+		dataType: string
+		lineageTag: eafffa5e-6936-5fe9-9671-3e49cf8341d3
+		sourceLineageTag: Description
+		summarizeBy: none
+		sourceColumn: Description
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Is Current'
+		dataType: boolean
+		lineageTag: 74dba030-f926-51bb-8e28-b301d57d0001
+		sourceLineageTag: IsCurrent
+		summarizeBy: none
+		sourceColumn: IsCurrent
+
+		annotation SummarizationSetBy = Automatic
+
+	hierarchy Products
+		lineageTag: 7d45adc7-2e96-5d90-a361-bcdaf4ffd98f
+
+		level Category
+			lineageTag: c4cb7a4e-4b6a-5b25-aa4d-c9abc5c6de50
+			column: Category
+
+		level Subcategory
+			lineageTag: 76782c0f-5b29-50de-ba0d-d8a9292e74ae
+			column: Subcategory
+
+		level Product
+			lineageTag: caa88a7e-9b7b-57b4-9d9a-0c1d0d6e81e3
+			column: Product
+
+	partition Product = entity
+		mode: directLake
+		source
+			entityName: DimProduct
+			schemaName: gold
+			expressionSource: 'DirectLake - AdventureWorksLH'
+
+	annotation PBI_ResultType = Table

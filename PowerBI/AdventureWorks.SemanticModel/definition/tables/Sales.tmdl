@@ -1,0 +1,329 @@
+/// One row per sales order line, for both the Internet and Reseller channels.
+table Sales
+	lineageTag: 1f1c1560-9d64-5a61-832e-3aab0ac20324
+	sourceLineageTag: [gold].[FactSales]
+
+	/// Total sales across both channels.
+	measure 'Sales Amount' = SUM ( Sales[SalesAmount] )
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: Sales
+		lineageTag: 6ee5f85e-68f2-5e85-9255-d949742dbf7c
+
+	/// Sales made directly to customers online.
+	measure 'Internet Sales' = CALCULATE ( [Sales Amount], Sales[Channel] = "Internet" )
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: Sales
+		lineageTag: dab16519-90c7-5455-a133-fe2c93fcc9db
+
+	/// Sales made through resellers.
+	measure 'Reseller Sales' = CALCULATE ( [Sales Amount], Sales[Channel] = "Reseller" )
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: Sales
+		lineageTag: 05f15178-a9d6-5d2e-8737-290bb7e5a43a
+
+	/// Units sold.
+	measure 'Order Quantity' = SUM ( Sales[OrderQuantity] )
+		formatString: #,0
+		displayFolder: Sales
+		lineageTag: 140ccebd-0f1a-528f-8600-44252aa1560f
+
+	/// Number of sales orders.
+	measure Orders = DISTINCTCOUNT ( Sales[SalesOrderNumber] )
+		formatString: #,0
+		displayFolder: Sales
+		lineageTag: c115d238-fd1a-55fa-952a-4ef21c3afa2c
+
+	/// Sales amount per order.
+	measure 'Average Order Value' = DIVIDE ( [Sales Amount], [Orders] )
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: Sales
+		lineageTag: afe66d5d-5ed2-55db-88f3-fd15a73a613c
+
+	/// Internet customers who bought something.
+	measure Customers = DISTINCTCOUNTNOBLANK ( Sales[CustomerKey] )
+		formatString: #,0
+		displayFolder: Sales
+		lineageTag: cfa48ecb-a15f-5f66-bf6d-e778d33d49ca
+
+	/// Standard cost of the products sold.
+	measure 'Total Cost' = SUM ( Sales[TotalProductCost] )
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: Profitability
+		lineageTag: 38ae1f6e-aebe-5418-9b2c-ffc6b734b961
+
+	/// Sales amount less product cost.
+	measure 'Gross Margin' = [Sales Amount] - [Total Cost]
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: Profitability
+		lineageTag: f76be4d1-84b0-5c36-a5ff-bbc21938f4b4
+
+	/// Gross margin as a share of sales.
+	measure 'Gross Margin %' = DIVIDE ( [Gross Margin], [Sales Amount] )
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: Profitability
+		lineageTag: 5babc05f-de73-5f36-9379-c9c500bfc1a4
+
+	/// Sales from January 1 to the last date in context.
+	measure 'Sales YTD' = TOTALYTD ( [Sales Amount], 'Date'[Date] )
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: Time intelligence
+		lineageTag: 8ce4dfe1-05e6-596f-aab0-fa554280e033
+
+	/// Sales in the same period one year earlier.
+	measure 'Sales PY' = CALCULATE ( [Sales Amount], SAMEPERIODLASTYEAR ( 'Date'[Date] ) )
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: Time intelligence
+		lineageTag: 503bba0f-bc1f-5e85-8b89-87c3ae772e4b
+
+	/// Growth in sales against the same period one year earlier.
+	measure 'Sales YoY %' = VAR PriorYear = [Sales PY] RETURN DIVIDE ( [Sales Amount] - PriorYear, PriorYear )
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: Time intelligence
+		lineageTag: d58ca297-d82a-562d-931e-08084e58eaee
+
+	/// Sales placed on the date they shipped instead of the date they were ordered.
+	measure 'Sales by Ship Date' = CALCULATE ( [Sales Amount], USERELATIONSHIP ( Sales[Ship Date], 'Date'[Date] ) )
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: Time intelligence
+		lineageTag: 7a38fee1-6759-5b14-9ec3-e4c299f699cb
+
+	column Channel
+		dataType: string
+		lineageTag: 07e9c294-b82f-5776-91c7-5bd57dfbd0a4
+		sourceLineageTag: Channel
+		summarizeBy: none
+		sourceColumn: Channel
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Sales Order Number'
+		dataType: string
+		lineageTag: 2c3ce351-f2cd-5a03-8243-2cb63e850edc
+		sourceLineageTag: SalesOrderNumber
+		summarizeBy: none
+		sourceColumn: SalesOrderNumber
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Sales Order Line'
+		dataType: int64
+		formatString: 0
+		lineageTag: 210932f0-7a9a-5253-b660-596d76f09d29
+		sourceLineageTag: SalesOrderLineNumber
+		summarizeBy: none
+		sourceColumn: SalesOrderLineNumber
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProductKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: feb56cd3-9fbb-5c7a-9761-3b09c9f8c16f
+		sourceLineageTag: ProductKey
+		summarizeBy: none
+		sourceColumn: ProductKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column CustomerKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 1bd0a6a6-3fea-53ad-a690-85934cb7c919
+		sourceLineageTag: CustomerKey
+		summarizeBy: none
+		sourceColumn: CustomerKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column ResellerKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 11fde669-ea48-588f-bc59-f2e57298abc3
+		sourceLineageTag: ResellerKey
+		summarizeBy: none
+		sourceColumn: ResellerKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column EmployeeKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 9c121906-1945-5fb5-8343-833ae3e7fbf8
+		sourceLineageTag: EmployeeKey
+		summarizeBy: none
+		sourceColumn: EmployeeKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column PromotionKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 59a2da5c-92d0-522e-bc40-d062beefcab2
+		sourceLineageTag: PromotionKey
+		summarizeBy: none
+		sourceColumn: PromotionKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column CurrencyKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: d3be8012-182a-5e29-820f-3046530269ea
+		sourceLineageTag: CurrencyKey
+		summarizeBy: none
+		sourceColumn: CurrencyKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column SalesTerritoryKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: b6939928-f85e-5d37-b1f7-778e71de3a93
+		sourceLineageTag: SalesTerritoryKey
+		summarizeBy: none
+		sourceColumn: SalesTerritoryKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Order Date'
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: c813da92-856b-5049-90d2-2ac4d1a39198
+		sourceLineageTag: OrderDate
+		summarizeBy: none
+		sourceColumn: OrderDate
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Due Date'
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: 06e7be6b-35bb-5b87-97d6-c3048508342c
+		sourceLineageTag: DueDate
+		summarizeBy: none
+		sourceColumn: DueDate
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Ship Date'
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: f1a3cdd5-279d-58ae-8da9-abf02d9d5aed
+		sourceLineageTag: ShipDate
+		summarizeBy: none
+		sourceColumn: ShipDate
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column OrderQuantity
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: dce523ec-558b-55ef-8c0b-f6e3ff0daf94
+		sourceLineageTag: OrderQuantity
+		summarizeBy: none
+		sourceColumn: OrderQuantity
+
+		annotation SummarizationSetBy = Automatic
+
+	column UnitPrice
+		dataType: double
+		isHidden
+		lineageTag: 0648313b-c5a3-573a-b613-3dd6af93a2aa
+		sourceLineageTag: UnitPrice
+		summarizeBy: none
+		sourceColumn: UnitPrice
+
+		annotation SummarizationSetBy = Automatic
+
+	column UnitPriceDiscountPct
+		dataType: double
+		isHidden
+		lineageTag: b2d8c9a4-feef-56d6-8711-8fa48e668f1a
+		sourceLineageTag: UnitPriceDiscountPct
+		summarizeBy: none
+		sourceColumn: UnitPriceDiscountPct
+
+		annotation SummarizationSetBy = Automatic
+
+	column DiscountAmount
+		dataType: double
+		isHidden
+		lineageTag: af9b51fd-56df-59c8-a0b3-1a6718efdf60
+		sourceLineageTag: DiscountAmount
+		summarizeBy: none
+		sourceColumn: DiscountAmount
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProductStandardCost
+		dataType: double
+		isHidden
+		lineageTag: 6e25a8e8-5d76-587c-bbff-421e48f39656
+		sourceLineageTag: ProductStandardCost
+		summarizeBy: none
+		sourceColumn: ProductStandardCost
+
+		annotation SummarizationSetBy = Automatic
+
+	column TotalProductCost
+		dataType: double
+		isHidden
+		lineageTag: 95881335-1f91-5c3b-a190-5302711762c4
+		sourceLineageTag: TotalProductCost
+		summarizeBy: none
+		sourceColumn: TotalProductCost
+
+		annotation SummarizationSetBy = Automatic
+
+	column SalesAmount
+		dataType: double
+		isHidden
+		lineageTag: ff919d72-cf88-5dea-b633-0b1c53647fd5
+		sourceLineageTag: SalesAmount
+		summarizeBy: none
+		sourceColumn: SalesAmount
+
+		annotation SummarizationSetBy = Automatic
+
+	column TaxAmt
+		dataType: double
+		isHidden
+		lineageTag: a3370c69-427a-5175-9447-32b5f459bf1a
+		sourceLineageTag: TaxAmt
+		summarizeBy: none
+		sourceColumn: TaxAmt
+
+		annotation SummarizationSetBy = Automatic
+
+	column Freight
+		dataType: double
+		isHidden
+		lineageTag: 90d3db55-cfb4-517b-9148-b16573ab6572
+		sourceLineageTag: Freight
+		summarizeBy: none
+		sourceColumn: Freight
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Sales = entity
+		mode: directLake
+		source
+			entityName: FactSales
+			schemaName: gold
+			expressionSource: 'DirectLake - AdventureWorksLH'
+
+	annotation PBI_ResultType = Table

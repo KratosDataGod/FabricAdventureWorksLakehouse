@@ -1,0 +1,230 @@
+/// Calendar of whole years covering every sales date. The fiscal year starts on July 1.
+table Date
+	lineageTag: b9aa7a81-afc7-5086-a513-cd66c379d844
+	sourceLineageTag: [gold].[DimDate]
+	dataCategory: Time
+
+	column Date
+		dataType: dateTime
+		isKey
+		formatString: Short Date
+		lineageTag: 9fb0bd14-b4f6-5ff5-81c5-15175553d752
+		sourceLineageTag: Date
+		summarizeBy: none
+		sourceColumn: Date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Year
+		dataType: int64
+		formatString: 0
+		lineageTag: 941dae91-553c-5947-83ba-d67c3b7cd24f
+		sourceLineageTag: Year
+		summarizeBy: none
+		sourceColumn: Year
+
+		annotation SummarizationSetBy = Automatic
+
+	column Quarter
+		dataType: int64
+		formatString: 0
+		lineageTag: 3518a547-b40d-5c93-ab1a-e447cbc44ee7
+		sourceLineageTag: Quarter
+		summarizeBy: none
+		sourceColumn: Quarter
+
+		annotation SummarizationSetBy = Automatic
+
+	column Month
+		dataType: string
+		lineageTag: 146b8f02-5e75-57c2-8810-f2c90edce2f8
+		sourceLineageTag: MonthName
+		summarizeBy: none
+		sourceColumn: MonthName
+		sortByColumn: 'Month Number'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Month Number'
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 39eed13f-3028-5c03-b341-fe28dcb8627a
+		sourceLineageTag: MonthNumber
+		summarizeBy: none
+		sourceColumn: MonthNumber
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Year Month'
+		dataType: string
+		lineageTag: 59da952f-bae6-5957-b9b7-98b139180b70
+		sourceLineageTag: YearMonth
+		summarizeBy: none
+		sourceColumn: YearMonth
+		sortByColumn: 'Year Month Sort'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Year Month Sort'
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: e2ffacf1-60dc-58e0-8da8-41830420f1c9
+		sourceLineageTag: YearMonthSort
+		summarizeBy: none
+		sourceColumn: YearMonthSort
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Day of Month'
+		dataType: int64
+		formatString: 0
+		lineageTag: fa739a93-dbb5-58c6-8b3f-1f0c0f5c1040
+		sourceLineageTag: DayOfMonth
+		summarizeBy: none
+		sourceColumn: DayOfMonth
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Day of Year'
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 80b15aab-c255-5506-a00c-e6b41f004981
+		sourceLineageTag: DayOfYear
+		summarizeBy: none
+		sourceColumn: DayOfYear
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Day of Week'
+		dataType: string
+		lineageTag: a329fde4-68a7-54f1-ae72-cd63a73fd627
+		sourceLineageTag: DayOfWeekName
+		summarizeBy: none
+		sourceColumn: DayOfWeekName
+		sortByColumn: 'Day of Week Number'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Day of Week Number'
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 31e2de0e-a364-5af5-a708-d097d0c46e44
+		sourceLineageTag: DayOfWeekNumber
+		summarizeBy: none
+		sourceColumn: DayOfWeekNumber
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Week of Year'
+		dataType: int64
+		formatString: 0
+		lineageTag: 9dee95d5-91de-58c6-8b8d-09225ab79d73
+		sourceLineageTag: WeekOfYear
+		summarizeBy: none
+		sourceColumn: WeekOfYear
+
+		annotation SummarizationSetBy = Automatic
+
+	column Semester
+		dataType: int64
+		formatString: 0
+		lineageTag: 365e874b-faac-55b1-9f1f-d3efe6853c12
+		sourceLineageTag: Semester
+		summarizeBy: none
+		sourceColumn: Semester
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Fiscal Year'
+		dataType: int64
+		formatString: 0
+		lineageTag: 3b6ab469-c9e9-56a8-9bbb-e43912b95d6d
+		sourceLineageTag: FiscalYear
+		summarizeBy: none
+		sourceColumn: FiscalYear
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Fiscal Quarter'
+		dataType: int64
+		formatString: 0
+		lineageTag: 78f87a27-6e9f-5d3b-a6f0-b5ba3a50dd60
+		sourceLineageTag: FiscalQuarter
+		summarizeBy: none
+		sourceColumn: FiscalQuarter
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Fiscal Semester'
+		dataType: int64
+		formatString: 0
+		lineageTag: 0b9e852e-0ae5-5a7f-bf19-c36535626de5
+		sourceLineageTag: FiscalSemester
+		summarizeBy: none
+		sourceColumn: FiscalSemester
+
+		annotation SummarizationSetBy = Automatic
+
+	column DateKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 23232c76-d5f9-519a-97f2-d6a68abcee66
+		sourceLineageTag: DateKey
+		summarizeBy: none
+		sourceColumn: DateKey
+
+		annotation SummarizationSetBy = Automatic
+
+	hierarchy Calendar
+		lineageTag: a241d0e0-9682-57cb-b684-7b40bf61cf18
+
+		level Year
+			lineageTag: 12b09328-c284-5177-b2b8-cf12d4daf7b5
+			column: Year
+
+		level Quarter
+			lineageTag: ff047850-1a2e-5b67-9a14-5efd50f501af
+			column: Quarter
+
+		level Month
+			lineageTag: fc175ddc-a153-5682-8be9-9d588f14b956
+			column: Month
+
+		level Date
+			lineageTag: 11739635-6144-5ac8-b7ec-0c0a0d867758
+			column: Date
+
+	hierarchy Fiscal
+		lineageTag: 15115ef4-4ff3-54f6-9908-0b6fe6f7d4f2
+
+		level 'Fiscal Year'
+			lineageTag: 472a43c4-be06-51de-aa2a-4a504e657597
+			column: 'Fiscal Year'
+
+		level 'Fiscal Quarter'
+			lineageTag: 4eabe63b-3dd3-529f-b411-2c5a055db9d9
+			column: 'Fiscal Quarter'
+
+		level Month
+			lineageTag: fa13ab01-13eb-5999-bac2-2e10f8f5231c
+			column: Month
+
+		level Date
+			lineageTag: 4c58aec1-e370-567c-9568-3af29d8693b0
+			column: Date
+
+	partition Date = entity
+		mode: directLake
+		source
+			entityName: DimDate
+			schemaName: gold
+			expressionSource: 'DirectLake - AdventureWorksLH'
+
+	annotation PBI_ResultType = Table

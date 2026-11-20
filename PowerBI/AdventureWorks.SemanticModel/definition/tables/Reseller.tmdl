@@ -1,0 +1,150 @@
+/// Resellers with their location.
+table Reseller
+	lineageTag: 0651ea9a-3843-5d96-9012-ea01d0648f05
+	sourceLineageTag: [gold].[DimReseller]
+
+	column ResellerKey
+		dataType: int64
+		isKey
+		isHidden
+		formatString: 0
+		lineageTag: 73f0c375-335a-5b4a-b1c1-7489536bbb51
+		sourceLineageTag: ResellerKey
+		summarizeBy: none
+		sourceColumn: ResellerKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Reseller Code'
+		dataType: string
+		lineageTag: 84cad795-cdc2-53a9-8b19-c6497abf9a62
+		sourceLineageTag: ResellerAlternateKey
+		summarizeBy: none
+		sourceColumn: ResellerAlternateKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column Reseller
+		dataType: string
+		lineageTag: 53005c99-858f-5791-b9a6-d26a736da624
+		sourceLineageTag: ResellerName
+		summarizeBy: none
+		sourceColumn: ResellerName
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Business Type'
+		dataType: string
+		lineageTag: 314cde79-f511-5e01-89fa-7a59ec3eab5e
+		sourceLineageTag: BusinessType
+		summarizeBy: none
+		sourceColumn: BusinessType
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Number of Employees'
+		dataType: int64
+		formatString: 0
+		lineageTag: a0bce295-8fcd-5e56-b463-423250c80020
+		sourceLineageTag: NumberEmployees
+		summarizeBy: none
+		sourceColumn: NumberEmployees
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Product Line'
+		dataType: string
+		lineageTag: b15a89e2-4723-538c-a1ae-0993f40c2695
+		sourceLineageTag: ProductLine
+		summarizeBy: none
+		sourceColumn: ProductLine
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Annual Sales'
+		dataType: double
+		formatString: \$#,0;(\$#,0);\$#,0
+		lineageTag: 9308fade-be58-5c53-87ff-80a9e05c2b3b
+		sourceLineageTag: AnnualSales
+		summarizeBy: none
+		sourceColumn: AnnualSales
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Annual Revenue'
+		dataType: double
+		formatString: \$#,0;(\$#,0);\$#,0
+		lineageTag: e3c8e9c4-2946-56b3-a7a8-81f6c6bf5cc4
+		sourceLineageTag: AnnualRevenue
+		summarizeBy: none
+		sourceColumn: AnnualRevenue
+
+		annotation SummarizationSetBy = Automatic
+
+	column Bank
+		dataType: string
+		lineageTag: 7a94aa34-851b-54f0-853c-30c79e019241
+		sourceLineageTag: BankName
+		summarizeBy: none
+		sourceColumn: BankName
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Year Opened'
+		dataType: int64
+		formatString: 0
+		lineageTag: 971b6109-0e91-5964-8661-700fe8fd69d6
+		sourceLineageTag: YearOpened
+		summarizeBy: none
+		sourceColumn: YearOpened
+
+		annotation SummarizationSetBy = Automatic
+
+	column City
+		dataType: string
+		lineageTag: 916ec74c-755d-5d19-a34e-c71b722ca70e
+		sourceLineageTag: City
+		dataCategory: City
+		summarizeBy: none
+		sourceColumn: City
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'State Province'
+		dataType: string
+		lineageTag: bb2d089c-d7d9-59bd-b835-f88af23d48fd
+		sourceLineageTag: StateProvince
+		dataCategory: StateOrProvince
+		summarizeBy: none
+		sourceColumn: StateProvince
+
+		annotation SummarizationSetBy = Automatic
+
+	column Country
+		dataType: string
+		lineageTag: 3da59a70-a804-5bff-ab18-db76baaf9a44
+		sourceLineageTag: Country
+		dataCategory: Country
+		summarizeBy: none
+		sourceColumn: Country
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Postal Code'
+		dataType: string
+		lineageTag: 6b8a9baa-461f-5246-9134-6d648855478e
+		sourceLineageTag: PostalCode
+		dataCategory: PostalCode
+		summarizeBy: none
+		sourceColumn: PostalCode
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Reseller = entity
+		mode: directLake
+		source
+			entityName: DimReseller
+			schemaName: gold
+			expressionSource: 'DirectLake - AdventureWorksLH'
+
+	annotation PBI_ResultType = Table

@@ -1,0 +1,43 @@
+/// Currency of each sale.
+table Currency
+	lineageTag: 78322ba1-c1e0-517b-ac2b-74b2a6800f56
+	sourceLineageTag: [gold].[DimCurrency]
+
+	column CurrencyKey
+		dataType: int64
+		isKey
+		isHidden
+		formatString: 0
+		lineageTag: 62c1431b-2b09-5826-9ba9-fb17a095dc60
+		sourceLineageTag: CurrencyKey
+		summarizeBy: none
+		sourceColumn: CurrencyKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Currency Code'
+		dataType: string
+		lineageTag: f34eb8fa-018f-5143-8026-192a228d6c86
+		sourceLineageTag: CurrencyCode
+		summarizeBy: none
+		sourceColumn: CurrencyCode
+
+		annotation SummarizationSetBy = Automatic
+
+	column Currency
+		dataType: string
+		lineageTag: c7cbbf64-6367-5ac8-ad6a-65a5499477d5
+		sourceLineageTag: CurrencyName
+		summarizeBy: none
+		sourceColumn: CurrencyName
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Currency = entity
+		mode: directLake
+		source
+			entityName: DimCurrency
+			schemaName: gold
+			expressionSource: 'DirectLake - AdventureWorksLH'
+
+	annotation PBI_ResultType = Table

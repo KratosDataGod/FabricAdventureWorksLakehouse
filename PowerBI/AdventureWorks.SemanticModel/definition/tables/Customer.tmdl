@@ -1,0 +1,201 @@
+/// Internet customers with their location.
+table Customer
+	lineageTag: fbd06968-f644-5bec-a781-cdf0298e07fa
+	sourceLineageTag: [gold].[DimCustomer]
+
+	column CustomerKey
+		dataType: int64
+		isKey
+		isHidden
+		formatString: 0
+		lineageTag: 9d8c3639-56d6-572c-b765-a2faab92cf7f
+		sourceLineageTag: CustomerKey
+		summarizeBy: none
+		sourceColumn: CustomerKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Customer Code'
+		dataType: string
+		lineageTag: 5f21e9c5-9844-57bc-b8a0-2bed0cbfc3ec
+		sourceLineageTag: CustomerAlternateKey
+		summarizeBy: none
+		sourceColumn: CustomerAlternateKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column Customer
+		dataType: string
+		lineageTag: 1e859b7c-c74a-522c-8798-c783b0b7465f
+		sourceLineageTag: CustomerName
+		summarizeBy: none
+		sourceColumn: CustomerName
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Birth Date'
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: 136b3cd3-e48e-5b0b-8c74-8a50c8843dce
+		sourceLineageTag: BirthDate
+		summarizeBy: none
+		sourceColumn: BirthDate
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Marital Status'
+		dataType: string
+		lineageTag: e61b06bf-811d-5dd2-aa9a-0d6de7f512ee
+		sourceLineageTag: MaritalStatus
+		summarizeBy: none
+		sourceColumn: MaritalStatus
+
+		annotation SummarizationSetBy = Automatic
+
+	column Gender
+		dataType: string
+		lineageTag: d2dc64ec-b71c-51c5-88d6-61f00ce4cd30
+		sourceLineageTag: Gender
+		summarizeBy: none
+		sourceColumn: Gender
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Yearly Income'
+		dataType: double
+		formatString: \$#,0;(\$#,0);\$#,0
+		lineageTag: 54aea930-58d7-56a3-a9e5-4f9728f0cbf3
+		sourceLineageTag: YearlyIncome
+		summarizeBy: none
+		sourceColumn: YearlyIncome
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Total Children'
+		dataType: int64
+		formatString: 0
+		lineageTag: 2b249e01-a8fd-530a-b62b-cc39e7a48b88
+		sourceLineageTag: TotalChildren
+		summarizeBy: none
+		sourceColumn: TotalChildren
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Children at Home'
+		dataType: int64
+		formatString: 0
+		lineageTag: 44792ef9-583e-5d7c-b927-73d09149443f
+		sourceLineageTag: NumberChildrenAtHome
+		summarizeBy: none
+		sourceColumn: NumberChildrenAtHome
+
+		annotation SummarizationSetBy = Automatic
+
+	column Education
+		dataType: string
+		lineageTag: c8cfcb8a-5d6d-59b4-ba6f-b57f96335216
+		sourceLineageTag: Education
+		summarizeBy: none
+		sourceColumn: Education
+
+		annotation SummarizationSetBy = Automatic
+
+	column Occupation
+		dataType: string
+		lineageTag: 57dc670e-8666-5f99-83c8-312367aad75b
+		sourceLineageTag: Occupation
+		summarizeBy: none
+		sourceColumn: Occupation
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Is Home Owner'
+		dataType: boolean
+		lineageTag: d39babbf-59a5-59ad-9635-254a4613bc07
+		sourceLineageTag: IsHomeOwner
+		summarizeBy: none
+		sourceColumn: IsHomeOwner
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Cars Owned'
+		dataType: int64
+		formatString: 0
+		lineageTag: 2391b25c-beb0-5d56-97e2-c01d7c777572
+		sourceLineageTag: NumberCarsOwned
+		summarizeBy: none
+		sourceColumn: NumberCarsOwned
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Commute Distance'
+		dataType: string
+		lineageTag: 95ecf733-6ece-551f-adaf-73ee26857e33
+		sourceLineageTag: CommuteDistance
+		summarizeBy: none
+		sourceColumn: CommuteDistance
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'First Purchase Date'
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: 983756bd-170e-5b4e-89d2-58b9c43e7ad0
+		sourceLineageTag: DateFirstPurchase
+		summarizeBy: none
+		sourceColumn: DateFirstPurchase
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column City
+		dataType: string
+		lineageTag: 4c04a0c7-1a80-5a1c-8126-b7a7f59f1ac8
+		sourceLineageTag: City
+		dataCategory: City
+		summarizeBy: none
+		sourceColumn: City
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'State Province'
+		dataType: string
+		lineageTag: b35f5b2a-e62d-56ad-89f8-2d6d12461356
+		sourceLineageTag: StateProvince
+		dataCategory: StateOrProvince
+		summarizeBy: none
+		sourceColumn: StateProvince
+
+		annotation SummarizationSetBy = Automatic
+
+	column Country
+		dataType: string
+		lineageTag: 4b83777c-0f49-568b-824f-0f411f6e6e50
+		sourceLineageTag: Country
+		dataCategory: Country
+		summarizeBy: none
+		sourceColumn: Country
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Postal Code'
+		dataType: string
+		lineageTag: 74072e26-fef2-5afb-b36f-c0751ed1ab1c
+		sourceLineageTag: PostalCode
+		dataCategory: PostalCode
+		summarizeBy: none
+		sourceColumn: PostalCode
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Customer = entity
+		mode: directLake
+		source
+			entityName: DimCustomer
+			schemaName: gold
+			expressionSource: 'DirectLake - AdventureWorksLH'
+
+	annotation PBI_ResultType = Table

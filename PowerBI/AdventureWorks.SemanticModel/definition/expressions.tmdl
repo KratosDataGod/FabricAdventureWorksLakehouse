@@ -1,0 +1,8 @@
+expression 'DirectLake - AdventureWorksLH' =
+		let
+		    Source = AzureStorage.DataLake("https://onelake.dfs.fabric.microsoft.com/00000000-0000-0000-0000-000000000000/11111111-1111-1111-1111-111111111111", [HierarchicalNavigation=true])
+		in
+		    Source
+	lineageTag: 68c69093-ca4a-5ffb-bc86-b2078337f722
+
+	annotation PBI_IncludeFutureArtifacts = False

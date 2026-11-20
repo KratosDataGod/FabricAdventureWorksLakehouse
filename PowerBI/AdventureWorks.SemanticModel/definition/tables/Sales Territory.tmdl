@@ -1,0 +1,68 @@
+/// Sales territories. The row-level security roles filter this table.
+table 'Sales Territory'
+	lineageTag: 46f94514-de45-5f8e-bbd0-fff5be1c9cce
+	sourceLineageTag: [gold].[DimSalesTerritory]
+
+	column SalesTerritoryKey
+		dataType: int64
+		isKey
+		isHidden
+		formatString: 0
+		lineageTag: c306db60-99a6-53af-b325-62aa979b6087
+		sourceLineageTag: SalesTerritoryKey
+		summarizeBy: none
+		sourceColumn: SalesTerritoryKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column Region
+		dataType: string
+		lineageTag: 16a55330-7eac-5bf4-a214-2a5d83b6ae96
+		sourceLineageTag: Region
+		summarizeBy: none
+		sourceColumn: Region
+
+		annotation SummarizationSetBy = Automatic
+
+	column Country
+		dataType: string
+		lineageTag: 03deaeb6-f22b-5cf3-be40-51a57205f56b
+		sourceLineageTag: Country
+		dataCategory: Country
+		summarizeBy: none
+		sourceColumn: Country
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Territory Group'
+		dataType: string
+		lineageTag: 59358be9-7609-583f-8c4e-b45da39a233a
+		sourceLineageTag: TerritoryGroup
+		summarizeBy: none
+		sourceColumn: TerritoryGroup
+
+		annotation SummarizationSetBy = Automatic
+
+	hierarchy Territories
+		lineageTag: c553dd57-f03a-5f38-9ccd-7bbd19f51a71
+
+		level 'Territory Group'
+			lineageTag: 7c210ec3-37fb-5463-bb6d-cc2a335bbb7f
+			column: 'Territory Group'
+
+		level Country
+			lineageTag: b7faa02a-fa4b-5d70-bcff-ea1250bb8d83
+			column: Country
+
+		level Region
+			lineageTag: 9b551e81-3b86-5475-b869-8a5306350b49
+			column: Region
+
+	partition 'Sales Territory' = entity
+		mode: directLake
+		source
+			entityName: DimSalesTerritory
+			schemaName: gold
+			expressionSource: 'DirectLake - AdventureWorksLH'
+
+	annotation PBI_ResultType = Table

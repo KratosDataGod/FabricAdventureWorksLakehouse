@@ -1,0 +1,5 @@
+/// Members see only sales in the Europe territory group.
+role Europe
+	modelPermission: read
+
+	tablePermission 'Sales Territory' = [Territory Group] == "Europe"
