@@ -132,7 +132,7 @@ GeographyKey|City|StateProvinceCode|StateProvinceName|CountryRegionCode|EnglishC
 131|Frankfurt|HE|Hessen|DE|Germany|60323|8|198.51.100.132
 132|Hamburg|HE|Hessen|DE|Germany|22001|8|198.51.100.133
 133|Kassel|HE|Hessen|DE|Germany|34117|8|198.51.100.134
-134|München|HE|Hessen|DE|Germany|80074|8|198.51.100.135
+134|MÃ¼nchen|HE|Hessen|DE|Germany|80074|8|198.51.100.135
 135|Salzgitter|HE|Hessen|DE|Germany|38231|8|198.51.100.136
 136|Ascheim|HH|Hamburg|DE|Germany|86171|8|198.51.100.137
 137|Augsburg|HH|Hamburg|DE|Germany|86171|8|198.51.100.138
@@ -147,8 +147,8 @@ GeographyKey|City|StateProvinceCode|StateProvinceName|CountryRegionCode|EnglishC
 146|Frankfurt am Main|HH|Hamburg|DE|Germany|60355|8|198.51.100.147
 147|Hamburg|HH|Hamburg|DE|Germany|20354|8|198.51.100.148
 148|Muehlheim|HH|Hamburg|DE|Germany|63151|8|198.51.100.149
-149|Mühlheim|HH|Hamburg|DE|Germany|63151|8|198.51.100.150
-150|München|HH|Hamburg|DE|Germany|80074|8|198.51.100.151
+149|MÃ¼hlheim|HH|Hamburg|DE|Germany|63151|8|198.51.100.150
+150|MÃ¼nchen|HH|Hamburg|DE|Germany|80074|8|198.51.100.151
 151|Paderborn|HH|Hamburg|DE|Germany|33041|8|198.51.100.152
 152|Berlin|NW|Nordrhein-Westfalen|DE|Germany|10501|8|198.51.100.153
 153|Berlin|NW|Nordrhein-Westfalen|DE|Germany|14197|8|198.51.100.154
@@ -157,7 +157,7 @@ GeographyKey|City|StateProvinceCode|StateProvinceName|CountryRegionCode|EnglishC
 156|Braunschweig|NW|Nordrhein-Westfalen|DE|Germany|38001|8|198.51.100.157
 157|Hannover|NW|Nordrhein-Westfalen|DE|Germany|30601|8|198.51.100.158
 158|Leipzig|NW|Nordrhein-Westfalen|DE|Germany|04139|8|198.51.100.159
-159|München|NW|Nordrhein-Westfalen|DE|Germany|80074|8|198.51.100.160
+159|MÃ¼nchen|NW|Nordrhein-Westfalen|DE|Germany|80074|8|198.51.100.160
 160|Paderborn|NW|Nordrhein-Westfalen|DE|Germany|33098|8|198.51.100.161
 161|Solingen|NW|Nordrhein-Westfalen|DE|Germany|42651|8|198.51.100.162
 162|Werne|NW|Nordrhein-Westfalen|DE|Germany|59368|8|198.51.100.163
@@ -167,12 +167,12 @@ GeographyKey|City|StateProvinceCode|StateProvinceName|CountryRegionCode|EnglishC
 166|Frankfurt am Main|SL|Saarland|DE|Germany|60061|8|198.51.100.167
 167|Frankfurt am Main|SL|Saarland|DE|Germany|60075|8|198.51.100.168
 168|Kiel|SL|Saarland|DE|Germany|24044|8|198.51.100.169
-169|München|SL|Saarland|DE|Germany|48001|8|198.51.100.170
-170|Münster|SL|Saarland|DE|Germany|48001|8|198.51.100.171
+169|MÃ¼nchen|SL|Saarland|DE|Germany|48001|8|198.51.100.170
+170|MÃ¼nster|SL|Saarland|DE|Germany|48001|8|198.51.100.171
 171|Neunkirchen|SL|Saarland|DE|Germany|66578|8|198.51.100.172
 172|Offenbach|SL|Saarland|DE|Germany|63009|8|198.51.100.173
 173|Poing|SL|Saarland|DE|Germany|66041|8|198.51.100.174
-174|Saarbrücken|SL|Saarland|DE|Germany|66001|8|198.51.100.175
+174|SaarbrÃ¼cken|SL|Saarland|DE|Germany|66001|8|198.51.100.175
 175|Saarlouis|SL|Saarland|DE|Germany|66740|8|198.51.100.176
 176|Stuttgart|SL|Saarland|DE|Germany|70452|8|198.51.100.177
 177|Stuttgart|SL|Saarland|DE|Germany|70511|8|198.51.100.178
@@ -216,7 +216,7 @@ GeographyKey|City|StateProvinceCode|StateProvinceName|CountryRegionCode|EnglishC
 215|Colombes|92|Hauts de Seine|FR|France|92700|7|198.51.100.216
 216|Courbevoie|92|Hauts de Seine|FR|France|92400|7|198.51.100.217
 217|Paris La Defense|92|Hauts de Seine|FR|France|92081|7|198.51.100.218
-218|Sèvres|92|Hauts de Seine|FR|France|92310|7|198.51.100.219
+218|SÃ¨vres|92|Hauts de Seine|FR|France|92310|7|198.51.100.219
 219|Suresnes|92|Hauts de Seine|FR|France|92150|7|198.51.100.220
 220|Bobigny|93|Seine Saint Denis|FR|France|93000|7|198.51.100.221
 221|Drancy|93|Seine Saint Denis|FR|France|93700|7|198.51.100.222
